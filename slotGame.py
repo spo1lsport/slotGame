@@ -17,12 +17,13 @@ max_bet = 10 # Oynanabilecek maksimum miktar.
 min_bet = 1 # Oynanabilecek minimum miktar.
 balance = 500
 
-def kac_tur(): # Kullanıcıdan kaç tur oynamak istediğini alır. 
-    try:
-        tur = int(input("Kaç tur oynamak istersiniz:"))
-    except ValueError: # Kullanıcı sayı girmeyip başka bir karakter girerse hata verir. 
-        print("Lütfen sayı giriniz.")
-    return tur
+def kac_tur(): # Kullanıcıdan kaç tur oynamak istediğini alır.
+    while True:
+        try:
+            tur = int(input("Kaç tur oynamak istersiniz:"))
+            return tur
+        except ValueError: # Kullanıcı sayı girmeyip başka bir karakter girerse hata verir. 
+            print("Lütfen sayı giriniz.")
 
 def bahis_yap(tur): #Kullanıcıdan oynanacak miktarı alır.
     while True:
@@ -32,7 +33,7 @@ def bahis_yap(tur): #Kullanıcıdan oynanacak miktarı alır.
                 print(f"En fazla {max_bet} TL oynayabilirsiniz.")
             elif bet < min_bet:
                 print(f"En az {min_bet} TL oynamalısınız.")
-            if balance < ( bet * tur * len(kazandiran_cizgiler) ) : # Kullanıcının bakiyesi oynanacak miktarın tur sayısıyla çarpımının 10 katından(çizgi başına) azsa hata verir.
+            elif balance < ( bet * tur * len(kazandiran_cizgiler) ) : # Kullanıcının bakiyesi oynanacak miktarın tur sayısıyla çarpımının 10 katından(çizgi başına) azsa hata verir.
                 print(f"Yeterli bakiyeniz bulunmamaktadır. En fazla {balance} TL oynayabilirsiniz.")
             elif balance == 0 or balance < 0:
                 print("Bakiyeniz bulunmamaktadır. Çıkış yapılıyor... /n Tekrar bekleriz.")
